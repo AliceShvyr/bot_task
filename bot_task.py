@@ -20,6 +20,7 @@ class taskL:
 
 TOKEN = "7379756569:AAE9pDtQR7LZpSewcuWKN5XxtEWxECxkuLk"
 TaskList = []
+fstop = False
 
 user_command = [
     BotCommand("start", "start bot"),
@@ -38,7 +39,7 @@ logging.basicConfig(
 # `update.effective_chat.id` - определяем `id` чата, откуда прилетело сообщение 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.set_my_commands(user_command)
-
+    fstop = False
     await context.bot.send_message(
         chat_id=update.effective_chat.id, 
         text="Hello! I'm a bot - TaskPlaner." + \
@@ -52,6 +53,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "\n/help - show list of commands" +\
             "\n\np.s.: use commands without <>"
         )
+    
+
+async def stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    TaskList.clear()
+    fstop = True
+
+    await context.bot.send_message(
+        chat_id=update.effective_chat.id, 
+        text="stopped")
 
 async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
@@ -178,6 +188,9 @@ if __name__ == "__main__":
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
 
+    stop_handler = CommandHandler('stop', stop)
+    application.add_handlers(stop_handler)
+
     help_handler = CommandHandler('help', help)
     application.add_handler(help_handler)
 
@@ -198,7 +211,10 @@ if __name__ == "__main__":
     unknown_handler = MessageHandler(filters.COMMAND, unknown)
     application.add_handler(unknown_handler)
 
-    application.run_polling()
+    if (fstop == True):
+        application.stop()
+    else:
+        application.run_polling()
 
 
 
