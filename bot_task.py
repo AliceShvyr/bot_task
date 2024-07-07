@@ -25,7 +25,8 @@ fstop = False
 user_command = [
     BotCommand("start", "start bot"),
     BotCommand("list", "show list of tasks"),
-    BotCommand("help", "show list of commands")
+    BotCommand("help", "show list of commands"),
+    BotCommand("stop", "stop bot")
 ]
 
 # updater - получает сообщения
@@ -188,8 +189,8 @@ if __name__ == "__main__":
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
 
-    stop_handler = CommandHandler('stop', stop)
-    application.add_handlers(stop_handler)
+    # stop_handler = CommandHandler('stop', stop)
+    # application.add_handlers(stop_handler)
 
     help_handler = CommandHandler('help', help)
     application.add_handler(help_handler)
