@@ -53,6 +53,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "\n/not_done <number of task> - set task as uncompleted" +\
             "\n/list - show list of tasks"+\
             "\n/help - show list of commands" +\
+            "\n/stop - clear the list and stops the bot"+\
             "\n\np.s.: use commands without <>"
         )
     
@@ -74,8 +75,8 @@ async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "\n/done <number of task> - set task as completed" +\
             "\n/not_done <number of task> - set task as uncompleted" +\
             "\n/list - show list of tasks"+\
-            "\n/stop - clear the list and stops the bot"+\
             "\n/help - show list of commands" +\
+            "\n/stop - clear the list and stops the bot"+\
             "\n\np.s.: use commands without <>"
         )
 
@@ -216,7 +217,7 @@ if __name__ == "__main__":
     application.add_handler(unknown_handler)
 
     if (fstop == True):
-        application.stop_running()
+        application.shutdown()
     else:
         application.run_polling()
 
