@@ -192,7 +192,7 @@ if __name__ == "__main__":
     application.add_handler(start_handler)
 
     stop_handler = CommandHandler('stop', stop)
-    application.add_handlers(stop_handler)
+    application.add_handler(stop_handler)
 
     help_handler = CommandHandler('help', help)
     application.add_handler(help_handler)
