@@ -40,6 +40,7 @@ logging.basicConfig(
 # `update.effective_chat.id` - определяем `id` чата, откуда прилетело сообщение 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.set_my_commands(user_command)
+    global fstop 
     fstop = False
     await context.bot.send_message(
         chat_id=update.effective_chat.id, 
@@ -58,6 +59,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     TaskList.clear()
+    global fstop
     fstop = True
 
     await context.bot.send_message(
