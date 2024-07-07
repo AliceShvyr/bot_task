@@ -216,10 +216,10 @@ if __name__ == "__main__":
     unknown_handler = MessageHandler(filters.COMMAND, unknown)
     application.add_handler(unknown_handler)
 
-    if (fclear == True):
-        application.shutdown()
-    else:
-        application.run_polling()
+    # if (fclear == True):
+    #     application.shutdown()
+    # else:
+    application.run_polling()
 
 
 
