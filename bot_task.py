@@ -20,13 +20,13 @@ class taskL:
 
 TOKEN = "7379756569:AAE9pDtQR7LZpSewcuWKN5XxtEWxECxkuLk"
 TaskList = []
-fstop = False
+fclear = False
 
 user_command = [
     BotCommand("start", "start bot"),
     BotCommand("list", "show list of tasks"),
     BotCommand("help", "show list of commands"),
-    BotCommand("stop", "stop bot")
+    BotCommand("clear", "clear list")
 ]
 
 # updater - получает сообщения
@@ -40,8 +40,8 @@ logging.basicConfig(
 # `update.effective_chat.id` - определяем `id` чата, откуда прилетело сообщение 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.set_my_commands(user_command)
-    global fstop 
-    fstop = False
+    global fclear 
+    fclear = False
     await context.bot.send_message(
         chat_id=update.effective_chat.id, 
         text="Hello! I'm a bot - TaskPlaner." + \
@@ -53,19 +53,19 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "\n/not_done <number of task> - set task as uncompleted" +\
             "\n/list - show list of tasks"+\
             "\n/help - show list of commands" +\
-            "\n/stop - clear the list and stops the bot"+\
+            "\n/clear - clear the list"+\
             "\n\np.s.: use commands without <>"
         )
     
 
-async def stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def clear(update: Update, context: ContextTypes.DEFAULT_TYPE):
     TaskList.clear()
-    global fstop
-    fstop = True
+    global fclear
+    fclear = True
 
     await context.bot.send_message(
         chat_id=update.effective_chat.id, 
-        text="stopped")
+        text="clearped")
 
 async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
@@ -76,7 +76,7 @@ async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "\n/not_done <number of task> - set task as uncompleted" +\
             "\n/list - show list of tasks"+\
             "\n/help - show list of commands" +\
-            "\n/stop - clear the list and stops the bot"+\
+            "\n/clear - clear the list"+\
             "\n\np.s.: use commands without <>"
         )
 
@@ -193,8 +193,8 @@ if __name__ == "__main__":
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
 
-    stop_handler = CommandHandler('stop', stop)
-    application.add_handler(stop_handler)
+    clear_handler = CommandHandler('clear', clear)
+    application.add_handler(clear_handler)
 
     help_handler = CommandHandler('help', help)
     application.add_handler(help_handler)
@@ -216,7 +216,7 @@ if __name__ == "__main__":
     unknown_handler = MessageHandler(filters.COMMAND, unknown)
     application.add_handler(unknown_handler)
 
-    if (fstop == True):
+    if (fclear == True):
         application.shutdown()
     else:
         application.run_polling()
