@@ -1,7 +1,7 @@
 from telegram import Update, BotCommand
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, filters, MessageHandler
 import logging
-from uuid import uuid4
+from config import TOKEN
 
 class taskL:
     def __init__(self, descr = "empty"):
@@ -18,7 +18,6 @@ class taskL:
         self.done = False
 
 
-TOKEN = "7379756569:AAE9pDtQR7LZpSewcuWKN5XxtEWxECxkuLk"
 TaskList = []
 fclear = False
 
