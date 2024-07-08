@@ -125,7 +125,7 @@ async def list(update: Update, context: ContextTypes.DEFAULT_TYPE):
             don = t.getState()
             taskitem = str(i+1) + descr
             if don:
-                listoftask += '~'+descr+'~'
+                listoftask += '<s>'+descr+'<s>'
                 # for c in taskitem:
                 #     listoftask += c + '\u0336'
             else:
@@ -134,7 +134,7 @@ async def list(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text=listoftask, parse_mode=ParseMode.MARKDOWN_V2)
+        text=listoftask, parse_mode=ParseMode.HTML)
 
 async def done(update: Update, context: ContextTypes.DEFAULT_TYPE):
     res = ""
