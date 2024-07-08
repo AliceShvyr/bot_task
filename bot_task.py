@@ -1,7 +1,6 @@
-from telegram import Update, BotCommand
+from telegram import Update, BotCommand, ParseMode
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, filters, MessageHandler
 import logging
-from telegram import ParseMode
 from config import TOKEN
 
 class taskL:
