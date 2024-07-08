@@ -1,6 +1,6 @@
 from telegram import Update, BotCommand
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, filters, MessageHandler
-from telegram import constants
+from telegram.constants import ParseMode
 import logging
 from config import TOKEN
 
@@ -134,7 +134,7 @@ async def list(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text=listoftask, parse_mode=constants.ParseMode.MARKDOWN_V2)
+        text=listoftask, parse_mode=ParseMode.MARKDOWN_V2)
 
 async def done(update: Update, context: ContextTypes.DEFAULT_TYPE):
     res = ""
