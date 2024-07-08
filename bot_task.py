@@ -1,5 +1,5 @@
 from telegram import Update, BotCommand
-from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, filters, MessageHandler, ParseMode
+from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, filters, MessageHandler
 import logging
 from config import TOKEN
 
@@ -124,16 +124,15 @@ async def list(update: Update, context: ContextTypes.DEFAULT_TYPE):
             don = t.getState()
             taskitem = str(i+1) + descr
             if don:
-                listoftask += '<s>'+descr+'<s>'
-                # for c in taskitem:
-                #     listoftask += c + '\u0336'
+                for c in taskitem:
+                    listoftask += c + '\u0336'
             else:
                 listoftask += taskitem
             listoftask += '\n'
 
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text=listoftask, parse_mode=ParseMode.HTML)
+        text=listoftask)
 
 async def done(update: Update, context: ContextTypes.DEFAULT_TYPE):
     res = ""
