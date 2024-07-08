@@ -123,9 +123,9 @@ async def list(update: Update, context: ContextTypes.DEFAULT_TYPE):
             t = TaskList[i]
             descr = t.getDescr()
             don = t.getState()
-            taskitem = str(i+1) + descr
+            taskitem = '*' + str(i+1) + ')*' + descr
             if don:
-                listoftask += '~'+descr+'~'
+                listoftask += '~'+taskitem+'~'
                 # for c in taskitem:
                 #     listoftask += c + '\u0336'
             else:
